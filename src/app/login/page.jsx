@@ -37,7 +37,7 @@ export default function LoginPage() {
       } else if (user.role === "employer") {
         router.push('/');
       } else if (user.role === "admin"){
-        router.push('/dashboard')
+        router.push('admin/dashboard')
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -119,17 +119,7 @@ export default function LoginPage() {
           Login
         </button>
       </form>
-      <div className="mt-4">
-        <button className={styles['google-button']} onClick={handleGoogleLogin}>
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12.48 10.92v2.94h4.74c-.21 1.26-.81 2.34-1.71 3.06v2.52h2.73c1.59-1.47 2.52-3.66 2.52-6.18 0-.57-.06-1.14-.15-1.68h-8.13z" fill="#4285F4" />
-            <path d="M12 21.75c3.15 0 5.79-1.05 7.71-2.85l-3.66-2.82c-1.05.69-2.37 1.11-4.05 1.11-3.12 0-5.76-2.1-6.72-4.92H1.47v3.09C3.39 19.35 7.35 21.75 12 21.75z" fill="#34A853" />
-            <path d="M5.28 14.25c-.24-.69-.39-1.44-.39-2.25s.15-1.56.39-2.25V6.66H1.47C.54 8.46 0 10.14 0 12s.54 3.54 1.47 5.34l3.81-3.09z" fill="#FBBC05" />
-            <path d="M12 5.64c1.71 0 3.24.57 4.44 1.68l3.33-3.33C17.79 2.19 15.15 1.25 12 1.25 7.35 1.25 3.39 3.65 1.47 7.65l3.81 3.09c.96-2.82 3.6-4.95 6.72-4.95z" fill="#EA4335" />
-          </svg>
-          Login with Google
-        </button>
-      </div>
+
       <p className={styles.footer}>
         Don’t have an account? <a className={styles.link} href="/register">Sign Up</a>
       </p>
