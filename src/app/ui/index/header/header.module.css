@@ -164,3 +164,62 @@
     display: none;
   }
 }
+/* --- Dropdown menu nhỏ gọn --- */
+.userWrapper {
+  position: relative; /* để dropdown bám vào phần avatar */
+  display: inline-block;
+}
+
+.userInitial {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.userInitial:hover {
+  background-color: #0056b3;
+}
+
+/* Dropdown list */
+.dropdown {
+  position: absolute;
+  top: 45px; /* đặt ngay dưới avatar */
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  min-width: 140px; /* nhỏ gọn */
+  z-index: 999;
+  padding: 6px 0;
+  display: none;
+}
+
+/* Khi dropdown mở */
+.dropdown.open {
+  display: block;
+}
+
+/* Mục trong dropdown */
+.dropdownItem {
+  display: block;
+  padding: 8px 12px;
+  text-align: left;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdownItem:hover {
+  background-color: #f2f2f2;
+}

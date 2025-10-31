@@ -4,7 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 
 export default function Footer() {
-    const [categories, setCategories] = useState([]);
+   
     const apiUrl = process.env.NEXT_PUBLIC_SERVER_API;
 
     // Hàm chuyển tên danh mục thành slug
@@ -19,19 +19,7 @@ export default function Footer() {
     };
 
     useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const response = await axios.get(`${apiUrl}/categories`);
-                const allCategories = response.data.data.data; // Truy cập mảng categories
-                // Chọn ngẫu nhiên 4 danh mục
-                const shuffled = allCategories.sort(() => 0.5 - Math.random());
-                setCategories(shuffled.slice(0, 4));
-            } catch (error) {
-                console.error('Error fetching categories:', error);
-            }
-        };
-
-        fetchCategories();
+        // Ví dụ gọi API để lấy danh mục công việc
     }, [apiUrl]);
 
     return (
@@ -54,7 +42,7 @@ export default function Footer() {
                     {/* Cột 3: Liên hệ */}
                     <div>
                         <h3 className="text-xl font-bold mb-4">Liên Hệ</h3>
-                        <p className="text-sm">Email: support@petaccessories.com</p>
+                        <p className="text-sm">Email: nguyenvietphuong@gmail.com</p>
                         <p className="text-sm">Hotline: 0123 456 789</p>
                     </div>
                 </div>
