@@ -30,6 +30,7 @@ export default function RegisterPage() {
       const response = await axios.post(`${apiUrl}/register`, {
         name: name,
         email: email,
+        phone: phone,
         password: password,
         password_confirmation: password_confirmation,
         role: role,
