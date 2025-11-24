@@ -1,0 +1,79 @@
+/* === Sidebar Container === */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 256px;
+
+  background: linear-gradient(180deg, #0d1b2a, #1b263b);
+  /* xanh đen phối xanh biển, tone sang */
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition: transform 0.3s ease;
+  z-index: 30;
+  color: #e0e6ed;
+}
+
+.hidden {
+  transform: translateX(-100%);
+}
+
+/* === Logo Section === */
+.logo {
+  height: 64px;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* === Menu Wrapper === */
+.menu {
+  padding: 24px 16px;
+}
+
+/* === Menu Items === */
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* Hover: sáng lên, phóng nhẹ */
+.menuItem:hover {
+  background: rgba(102, 219, 255, 0.12);
+  color: #66dbff;
+  transform: translateX(4px);
+  box-shadow: 0px 3px 8px rgba(102, 219, 255, 0.15);
+}
+
+/* === ACTIVE ITEM === */
+.active {
+  background: linear-gradient(90deg, #1b98e0, #62bdfc);
+  color: #ffffff;
+  box-shadow: 0px 4px 14px rgba(27, 152, 224, 0.35);
+  transform: translateX(4px);
+}
+
+/* Inactive default */
+.inactive {
+  color: #d6dce5;
+}
+
+/* Inactive hover */
+.inactive:hover {
+  background: rgba(102, 219, 255, 0.12);
+  color: #66dbff;
+}

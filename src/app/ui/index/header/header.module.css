@@ -1,225 +1,33 @@
-.header {
-  background-color: #f8f8f8;
-  border-bottom: 2px solid #eae8e8;
-  padding: 10px 0;
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Logo và menu */
-.leftSection {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.logo img {
-  height: 40px;
-}
-
-.hamburger {
-  display: none;
-  font-size: 22px;
-  cursor: pointer;
-  color: #333;
-}
-
-/* Thanh tìm kiếm + bộ lọc */
-.searchBar {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  max-width: 700px;
-  margin: 0 20px;
-}
-
-.searchInput {
-  flex: 1;
-  padding: 8px 12px;
-  border: 2px solid #ddd;
-  border-radius: 20px;
-  font-size: 14px;
-  outline: none;
-}
-
-.searchInput:focus {
-  border-color: #007bff;
-}
-
-.filterSelect {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  background-color: #fff;
-}
-
-.filterSelect:hover {
-  border-color: #0070f3;
-}
-
-.searchIcon {
-  color: #666;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.searchIcon:hover {
-  color: #007bff;
-}
-
-/* Khu vực đăng nhập */
-.rightSection {
-  display: flex;
-  align-items: center;
-}
-
-.loginButton {
-  color: #333;
-  font-size: 18px;
-  text-decoration: none;
-}
-
-.loginButton:hover {
-  color: #007bff;
-}
-
-/* Sidebar (mobile) */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 80%;
-  height: 100%;
-  background-color: #fff;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  z-index: 1001;
-  padding: 20px;
-}
-
-.sidebar.open {
-  transform: translateX(0);
-}
-
-.sidebarHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.sidebarLogo {
-  height: 30px;
-}
-
-.sidebarList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebarLink {
-  display: block;
-  padding: 10px;
-  color: #333;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.sidebarLink:hover {
-  background-color: #f0f0f0;
-}
-
-/* Overlay khi sidebar mở */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 1000;
-}
-
+.header { background:#f8f8f8; border-bottom:2px solid #eae8e8; padding:10px 0; position:sticky; top:0; width:100%; z-index:1000; }
+.container { display:flex; align-items:center; justify-content:space-between; max-width:1200px; margin:0 auto; padding:0 20px; }
+.leftSection { display:flex; align-items:center; gap:16px; }
+.logo img { height:55px; transition:transform 0.2s; }
+.logo img:hover { transform:scale(1.05); }
+.hamburger { display:none; font-size:22px; cursor:pointer; color:#333; }
+.searchBar { flex:1; display:flex; align-items:center; gap:8px; max-width:700px; margin:0 20px; }
+.searchInput { flex:1; padding:8px 12px; border:2px solid #ddd; border-radius:20px; font-size:14px; outline:none; }
+.searchInput:focus { border-color:#007bff; }
+.filterSelect { padding:8px; border:1px solid #ccc; border-radius:6px; font-size:14px; background:#fff; }
+.filterSelect:hover { border-color:#0070f3; }
+.searchIcon { color:#666; font-size:18px; cursor:pointer; transition:color 0.2s; }
+.searchIcon:hover { color:#007bff; }
+.loginSection { display:flex; align-items:center; gap:12px; }
+.userWrapper { position:relative; display:inline-block; }
+.userInitial { width:38px; height:38px; border-radius:50%; background:#007bff; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:16px; cursor:pointer; transition:background 0.2s; }
+.userInitial:hover { background:#0056b3; }
+.dropdown { position:absolute; top:45px; right:0; background:#fff; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.15); min-width:140px; z-index:999; padding:6px 0; }
+.dropdownItem { display:block; padding:8px 12px; color:#333; font-size:14px; text-align:left; cursor:pointer; border:none; background:none; width:100%; text-decoration:none; }
+.dropdownItem:hover { background:#f2f2f2; }
+.loginButton { font-size:22px; color:#333; }
+.icon { vertical-align:middle; }
+/* Sidebar */
+.sidebar { position:fixed; top:0; left:0; width:80%; height:100%; background:#fff; transform:translateX(-100%); transition:transform 0.3s ease; z-index:1001; padding:20px; }
+.sidebar.open { transform:translateX(0); }
+.sidebarHeader { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+.sidebarLogo { height:40px; }
+.sidebarList { list-style:none; padding:0; margin:0; }
+.sidebarLink { display:block; padding:10px; color:#333; text-decoration:none; font-weight:500; }
+.sidebarLink:hover { background:#f0f0f0; }
+.overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:1000; }
 /* Responsive */
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-
-  .searchBar {
-    display: none;
-  }
-}
-/* --- Dropdown menu nhỏ gọn --- */
-.userWrapper {
-  position: relative; /* để dropdown bám vào phần avatar */
-  display: inline-block;
-}
-
-.userInitial {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: #007bff;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.userInitial:hover {
-  background-color: #0056b3;
-}
-
-/* Dropdown list */
-.dropdown {
-  position: absolute;
-  top: 45px; /* đặt ngay dưới avatar */
-  right: 0;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  min-width: 140px; /* nhỏ gọn */
-  z-index: 999;
-  padding: 6px 0;
-  display: none;
-}
-
-/* Khi dropdown mở */
-.dropdown.open {
-  display: block;
-}
-
-/* Mục trong dropdown */
-.dropdownItem {
-  display: block;
-  padding: 8px 12px;
-  text-align: left;
-  color: #333;
-  text-decoration: none;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.dropdownItem:hover {
-  background-color: #f2f2f2;
-}
+@media (max-width:768px) { .hamburger { display:block; } .searchBar { display:none; } }

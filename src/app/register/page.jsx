@@ -8,16 +8,22 @@ export default function RegisterPage() {
   const apiUrl = process.env.NEXT_PUBLIC_SERVER_API;
   const router = useRouter();
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  const [password_confirmation, setPassword_confirmation] = useState('');
-  const [role, setRole] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    password: '',
+    password_confirmation: '',
+    role: '',
+  });
   const [errors, setErrors] = useState({});
   const [generalError, setGeneralError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -27,39 +33,32 @@ export default function RegisterPage() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(`${apiUrl}/register`, {
-        name: name,
-        email: email,
-        phone: phone,
-        password: password,
-        password_confirmation: password_confirmation,
-        role: role,
-      });
+      const response = await axios.post(`${apiUrl}/register`, formData);
 
-      setSuccessMessage('Đăng ký tài khoản thành công! Bạn có thể đăng nhập ngay.');
-      setName('');
-      setEmail('');
-      setPhone('');
-      setPassword('');
-      setPassword_confirmation('');
-      setGeneralError('');
+      if (formData.role === 'employer') {
+        setSuccessMessage('Đăng ký tài khoản nhà tuyển dụng thành công! Vui lòng chờ admin xác nhận để được hoạt động.');
+      } else {
+        setSuccessMessage('Đăng ký tài khoản thành công! Bạn có thể đăng nhập ngay.');
+      }
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        password: '',
+        password_confirmation: '',
+        role: '',
+      });
     } catch (error) {
       if (error.response) {
         if (error.response.status === 422) {
-          const errors = error.response.data.errors;
-          if(errors?.name){
-            setErrors({name: [errors.name[0]]});
-            
-          } else if(errors?.email){
-            setErrors({email:[errors.email[0]]});
-          } else if(errors?.password){
-            setErrors({password_confirmation:[errors.password[0]]});
-          }else if(errors?.role){
-            setErrors({role:[errors.role[0]]});
-          } 
+          const backendErrors = error.response.data.errors;
+          const newErrors = {};
+          ['name','email','phone','password','role','password_confirmation'].forEach(field => {
+            if (backendErrors[field]) newErrors[field] = backendErrors[field][0];
+          });
+          setErrors(newErrors);
           setGeneralError('Vui lòng kiểm tra lại các thông tin đã nhập.');
-        }
-         else  {
+        } else {
           setGeneralError('Đã có lỗi xảy ra phía máy chủ. Vui lòng thử lại sau.');
         }
       } else if (error.request) {
@@ -77,98 +76,47 @@ export default function RegisterPage() {
       <h2 className={styles.title}>Đăng Ký Tài Khoản</h2>
       <p className={styles.description}>Nhập thông tin để tạo tài khoản mới.</p>
       <form className={styles.form} onSubmit={handleRegister}>
-        <div>
-          <label htmlFor="name" className={styles.label}>Họ và tên</label>
-          <input
-            className={`${styles.input} ${errors.name ? styles['input-error'] : ''}`}
-            id="name"
-            name="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            disabled={isLoading}
-          />
-          {errors.name && <p className={styles['error-field']}>{errors.name[0]}</p>}
-        </div>
-        <div>
-          <label htmlFor="email" className={styles.label}>Email</label>
-          <input
-            className={`${styles.input} ${errors.email ? styles['input-error'] : ''}`}
-            id="email"
-            name="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            disabled={isLoading}
-          />
-          {errors.email && <p className={styles['error-field']}>{errors.email[0]}</p>}
-        </div>
-        <div>
-          <label htmlFor="phone" className={styles.label}>Số điện thoại</label>
-          <input
-            className={`${styles.input} ${errors.phone ? styles['input-error'] : ''}`}
-            id="phone"
-            name="phone"
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-            disabled={isLoading}
-          />
-          {errors.phone && <p className={styles['error-field']}>{errors.phone[0]}</p>}
-        </div>
-        <div>
-          <label htmlFor="password" className={styles.label}>Mật khẩu</label>
-          <input
-            className={`${styles.input} ${errors.password ? styles['input-error'] : ''}`}
-            id="password"
-            name="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            minLength={6}
-            disabled={isLoading}
-          />
-          {errors.password && <p className={styles['error-field']}>{errors.password[0]}</p>}
-        </div>
-        <div>
-          <label htmlFor="password_confirmation" className={styles.label}>Xác nhận mật khẩu</label>
-          <input
-            className={`${styles.input} ${errors.password_confirmation ? styles['input-error'] : ''}`}
-            id="password_confirmation"
-            name="password_confirmation"
-            type="password"
-            value={password_confirmation}
-            onChange={(e) => setPassword_confirmation(e.target.value)}
-            required
-            disabled={isLoading}
-          />
-          {errors.password_confirmation && <p className={styles['error-field']}>{errors.password_confirmation[0]}</p>}
-        </div>
+        {['name','email','phone','password','password_confirmation'].map(field => (
+          <div key={field}>
+            <label htmlFor={field} className={styles.label}>
+              {field === 'name' ? 'Họ và tên' :
+               field === 'email' ? 'Email' :
+               field === 'phone' ? 'Số điện thoại' :
+               field === 'password' ? 'Mật khẩu' : 'Xác nhận mật khẩu'}
+            </label>
+            <input
+              className={`${styles.input} ${errors[field] ? styles['input-error'] : ''}`}
+              id={field}
+              name={field}
+              type={field.includes('password') ? 'password' : field === 'email' ? 'email' : 'text'}
+              value={formData[field]}
+              onChange={handleChange}
+              required
+              minLength={field.includes('password') ? 6 : undefined}
+              disabled={isLoading}
+            />
+            {errors[field] && <p className={styles['error-field']}>{errors[field]}</p>}
+          </div>
+        ))}
+
         <div>
           <label htmlFor="role" className={styles.label}>Chọn vai trò</label>
           <select
             className={`${styles.input} ${errors.role ? styles['input-error'] : ''}`}
             id="role"
             name="role"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
+            value={formData.role}
+            onChange={handleChange}
             required
             disabled={isLoading}
-         >
+          >
             <option value="">-- Chọn vai trò --</option>
-            <option value="jobSeeker">Người tìm việc</option>
+            <option value="jobseeker">Người tìm việc</option>
             <option value="employer">Nhà tuyển dụng</option>
           </select>
-
-          {errors.role && (
-          <p className={styles['error-field']}>{errors.role[0]}</p>
-          )}
+          {errors.role && <p className={styles['error-field']}>{errors.role}</p>}
         </div>
-        
+
         {generalError && <p className={styles.error}>{generalError}</p>}
         {successMessage && <p className={styles.success}>{successMessage}</p>}
         <button className={styles.button} type="submit" disabled={isLoading}>

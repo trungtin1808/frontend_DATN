@@ -9,6 +9,11 @@
     width: 100%;
     min-height: auto;
 }
+.logo img { 
+    height:55px; 
+    transition:transform 0.2s;
+    border-radius: 10px;
+ }
 
 .navList {
     list-style: none;

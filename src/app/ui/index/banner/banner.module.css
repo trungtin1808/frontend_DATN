@@ -1,47 +1,42 @@
-/* ./bannerPage.module.css */
 .bannerContainer {
-    width: 100%;
-    overflow: hidden;
-    /* Hide images that are not currently visible */
-    position: relative;
-    /* For positioning indicators if needed */
+  width: 60%; /* Giảm kích thước banner, ví dụ còn 60% chiều rộng */
+  max-width: 800px; /* Giới hạn kích thước tối đa */
+  margin: 40px auto; /* Căn giữa theo chiều ngang, thêm khoảng cách trên dưới */
+  overflow: hidden;
+  position: relative;
+  border-radius: 16px; /* Bo góc banner cho đẹp */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Thêm bóng nhẹ */
 }
 
 .bannerImage {
-    display: block;
-    /* Prevent extra space below the image */
-    width: 100%;
-    /* Make the image responsive */
-    height: auto;
-    /* Maintain aspect ratio */
-    transition: opacity 0.5s ease-in-out;
-    /* Optional: Add a fade effect */
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 0.5s ease-in-out;
+  border-radius: 16px;
 }
 
 /* Optional: Styling for slide indicators */
 .indicators {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
 }
 
 .indicators button {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 12px;
-    height: 12px;
-    padding: 0;
-    cursor: pointer;
-    font-size: 0;
-    /* Hide button text */
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  font-size: 0;
+  transition: background-color 0.3s;
 }
 
 .indicators button.active {
-    background-color: white;
-    color: black;
+  background-color: white;
 }
